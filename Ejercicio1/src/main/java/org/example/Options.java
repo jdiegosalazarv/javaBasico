@@ -28,7 +28,63 @@ public class Options {
                 }
             }
         }
+    }
 
+    public static Client[] removeClient(Client[] clients){
+        Scanner scanner = new Scanner(System.in);
+        Client[] clients2 = clients;
+        System.out.println("Indica la posición que deseas borrar");
+        try{
+            int position = Integer.parseInt(scanner.nextLine())-1;
+            if(position >= 0 && position < clients.length - 1){
+                if(clients.length>4){
+                    clients2 = modifyArray(clients, clients.length-1,position);
+                }else{
+                    clients2 = modifyArray(clients,4,position);
+                }
 
+            }else{
+                System.out.println("Posición equivocada");
+            }
+        }catch (Exception e){
+            System.out.println("Error, debes ingresar un número válido");
+        }
+
+        return clients2;
+    }
+
+    public static Client[] modifyArray(Client[] clients, int size, int position){
+        Client[] clients2 = new Client[size];
+        int newPosition = 0;
+        for (int i = 0; i < clients.length; i++){
+            if (i == position){
+                continue;
+            }
+            clients2[newPosition++] = clients[i];
+        }
+        return clients2;
+    }
+
+    public static void findClient(Client[] clients){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Indica el número de cédula del cliente");
+        try{
+            int id = Integer.parseInt(scanner.nextLine());
+            int position = 0;
+            boolean isClient = false;
+            for (int i = 0; i < clients.length; i++) {
+                position++;
+                if (clients[i] != null && clients[i].getId() == id){
+                    isClient = true;
+                    System.out.println("El cliente que se busca está en la posición " + position + ", El cliente se llama " +
+                            clients[i].getName() + " y su cédula es " + clients[i].getId());
+                }
+            }
+            if (!isClient){
+                System.out.println("No hay ningún cliente con ese número de cédula");
+            }
+        }catch (Exception e){
+            System.out.println("Error, debes ingresar un número");
+        }
     }
 }

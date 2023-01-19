@@ -21,7 +21,7 @@ public class Main {
             switch (option) {
                 case "a":
                     if(clients.length == 10){
-                        System.out.println("No es posible agregar más clientes");
+                        System.out.println("Debe borrar un cliente antes de poder ingresar uno nuevo");
                         break;
                     }else{
                         if (clients[clients.length -1] == null){
@@ -44,10 +44,10 @@ public class Main {
                         }
                     }
                 case "b":
-                    System.out.println("Opcion b");
+                    clients = Options.removeClient(clients);
                     break;
                 case "c":
-                    System.out.println("opcion c");
+                    Options.findClient(clients);
                     break;
                 case "d":
                     Options.showClients(clients);
@@ -59,18 +59,5 @@ public class Main {
                     System.out.println("Opción incorrecta, ");
             }
         }while(!option.equals("e"));
-        System.out.println(clients[0]);
-
-
-
-//        Client client = new Client("Juan", 124);
-//        clients[0] = client;
-//        System.out.println(clients[0]);
-//        Client [] clients3 = clients;
-//        Client client2 = new Client("Andres", 222);
-//        clients3[1] = client2;
-//        System.out.println(clients3[0]);
-//        System.out.println(clients3[1]);
-
     }
 }
