@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -27,19 +28,24 @@ public class Main {
                         if (clients[clients.length -1] == null){
                             for(int i = 0; i < clients.length; i++){
                                 if(clients[i]==null){
-                                    clients[i] = Options.addClient();
+                                    Client client = Options.addClient();
+                                    if(client != null){
+                                        clients[i] = client;
+                                    }else {
+                                        System.out.println("No es posible usar el valor");
+                                    }
                                     break;
                                 }
                             }
                             break;
                         }else{
-                            Client [] clients2 = clients;
-                            int size = clients2.length+1;
-                            clients = new Client[size];
-                            for (int i = 0; i < clients2.length; i++){
-                                clients[i] = clients2[i];
+                            clients = Arrays.copyOf(clients, clients.length+1);
+                            Client client = Options.addClient();
+                            if(client != null){
+                                clients[clients.length-1] = client;
+                            }else {
+                                System.out.println("No es posible usar el valor");
                             }
-                            clients[clients2.length] = Options.addClient();
                             break;
                         }
                     }

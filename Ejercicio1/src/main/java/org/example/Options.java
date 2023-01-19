@@ -7,13 +7,27 @@ public class Options {
 
     public static Client addClient(){
         Scanner scanner = new Scanner(System.in);
+        boolean isString = false;
+        boolean isNumber = false;
+        Client client;
         System.out.println("Ingresa el nombre del cliente");
         String name = scanner.nextLine();
-        System.out.println("Ingresa la cédula del cliente");
-        Integer id = Integer.parseInt(scanner.nextLine());
-        Client client = new Client(name, id);
-        return client;
-
+        if(name.matches("[a-z]+")){
+            isString = true;
+        }
+        Integer id = 0;
+        try{
+            System.out.println("Ingresa la cédula del cliente");
+            id = Integer.parseInt(scanner.nextLine());
+            isNumber = true;
+        }catch (Exception e){
+            System.out.println("No has ingresado un número");
+        }
+        if(isString && isNumber){
+            client = new Client(name, id);
+            return client;
+        }
+        return null;
     }
 
     public static void showClients(Client[] clients){
